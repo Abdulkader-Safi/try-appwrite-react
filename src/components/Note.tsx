@@ -2,6 +2,7 @@ import { Models } from "appwrite";
 import { useState } from "react";
 import db from "../appwrite/databases";
 import DeleteIcon from "../assets/DeleteIcon";
+import addNotification from "react-push-notification";
 
 type IProp = {
   noteData: Models.Document;
@@ -16,6 +17,7 @@ const Note = ({ noteData, setNotes }: IProp) => {
     await db.notes.update(note.$id, { completed });
     setNote((prevNote: Models.Document) => ({ ...prevNote, completed }));
   };
+
   const handleDelete = async () => {
     await db.notes.delete(note.$id);
     setNotes((prevState: Models.Document[]) =>
